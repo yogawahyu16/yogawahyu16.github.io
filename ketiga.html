@@ -341,30 +341,40 @@
 
 
     <!-- Contact -->
-        <section class="yoga text-center text-dark" id="Contact" methodd="POST">
+    <section class="yoga text-center text-dark" id="Contact" methodd="POST">
         <div class="container">
         <div class="row mb-1">
             <div class="col">
             <h2> Contact Me</h2>
+            <p>!!! maaf kak fitur ini masih dalam tahap perbaikan !!!</p>
+            <p>jika ada hal yang ingin di sampaikan dapat melalui email yang tertera di bawah</p>
             </div>
         </div>
         <div class="row mb-3">
             <h4 class="sent-notification"></h4>
-            <form id="myForm" method="POST">
+            <div class="alert alert-primary alert-dismissible fade show d-none" role="alert">
+                <strong>Mohon maaf</strong>  Fitur Masih Dalam Perbaikan
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            <form id="myForm" method="POST" name="Submit-Form-to-Google-Sheet">
             <fieldset>
             <div class="mb-3 text-start">
                 <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name" tabindex="1" placeholder="Fill Your Complete Name" required aria-describedby="name">
+                <input type="text" class="form-control" id="name" tabindex="1" placeholder="Fill Your Complete Name" required aria-describedby="name" name="nama">
             </div>
             <div class="mb-3 text-start">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="example@gmail.com" required aria-describedby="email">
+                <input type="email" class="form-control" id="email" placeholder="example@gmail.com" required aria-describedby="email" name="email">
             </div>
             <div class="mb-3 text-start">
                 <label for="pesan" class="form-label">Pesan</label>
-                <textarea class="form-control" id="pesan" placeholder="Example = helloo yoga" rows="3"></textarea>
+                <textarea class="form-control" id="pesan" placeholder="Example = helloo yoga" rows="3" name="pesan"></textarea>
             </div>
             <button href='#' type="submit" data-toggl="modal" data-target="#modalEdit" eonclick="sendEmail()" value="Send an Email" class="btn btn-primary" $mail-id>Submit</button>
+            <button class="btn btn-loading d-none" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Loading...
+              </button>
             </fieldset>
             </form>
         </div>
@@ -413,6 +423,35 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <form name="submit-to-google-sheet">
+        <input name="email" type="email" placeholder="Email" required>
+        <button type="submit">Send</button>
+      </form>
+      
+      <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbx5AnYZtSTfdIiUy59Qx-61A1jfCJGsHiEG6V4kxkjVZMyhVefpQnUih1nXseQisYQD/exec'
+        const form = document.forms['Submit-Form-to-Google-Sheet']
+        const btnKirim = document.querySelector('.btn-kirim');
+        const btnLoading = document.querySelector('.btn-loading');
+const myAlert = document.querySelector('.my-alert');
 
+
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          //ketika tombol submit di klik
+          btnLoading.classList.toggle('d-none');
+          btnKirim.classList.toggle('d-none');
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                // tampilkan tombol kirim
+                 btnLoading.classList.toggle('d-none');
+                 btnKirim.classList.toggle('d-none'); 
+                 //allert
+                 myAlert.classList.toggle('d-none');
+                 form.reset();
+                console.log('Success!', response))}
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
   </body>
 </html>
