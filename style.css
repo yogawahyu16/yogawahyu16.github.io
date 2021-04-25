@@ -1,0 +1,63 @@
+.navbar {
+    background-color: #003B46;
+}
+.jumbotron {
+    padding: 10rem 5rem;
+    background-color: #07575b;
+}
+.foot {
+    background-color: #003B46;
+}
+.yoga {
+  padding: 10rem 5rem;
+}
+
+
+
+body {
+  font-family: Arial;
+  color: white;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  background-color: #07575b;
+}
+
+.right {
+  right: 0;
+  background-color: #66a5ad;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+
+
+
+
+/* dekstop version */
+@media (min-width: 992px) {
+    .nav-link:hover {
+        border-bottom: rgb(57, 4, 202);
+    }
+ }
